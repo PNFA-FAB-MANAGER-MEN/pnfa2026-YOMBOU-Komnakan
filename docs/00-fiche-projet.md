@@ -2,97 +2,90 @@
 
 > Livrable L2 · Jalon J1 (samedi 29 août 2026) · validée par l'encadreur référent.
 > Aucune fabrication n'est autorisée avant la validation de ce jalon.
+> **Version mise à jour le 16 septembre 2026** pour refléter le dispositif final, après plusieurs itérations matérielles documentées dans le journal (voir notamment l'entrée du 12 septembre).
 
 ## 1. Titre et accroche
 
-**Robot Éducatif  plateforme mobile multi-capteurs**
+**Robot Éducatif — évitement d'obstacle télécommandé, avec affichage de distance en temps réel**
 
-Un robot à 2 roues que les élèves programment eux-mêmes pour suivre une ligne, éviter des obstacles, et afficher en temps réel ce que perçoivent ses capteurs (son, lumière, distance) — un support concret pour apprendre la logique de commande et la mesure physique.
+Un robot à 2 roues qui détecte les obstacles par ultrason, les évite automatiquement par une manœuvre de rotation signalée par une LED, affiche la distance mesurée en temps réel sur un écran, et reste pilotable à tout moment par télécommande.
 
 ## 2. Besoin et bénéficiaires
 
-L'initiation à la robotique et à la programmation embarquée manque souvent de support concret et réutilisable dans les établissements : peu de matériel abordable permet de manipuler à la fois mécanique, capteurs et code sur un même objet. Un robot éducatif modulaire, conservé au FabLab ou au club de robotique, offre un support réutilisable d'année en année pour enseigner la prise de décision algorithmique à partir de données physiques réelles.
+L'initiation à la robotique et à la programmation embarquée manque souvent de support concret et réutilisable dans les établissements. Un robot éducatif compact, combinant mesure physique (distance), décision automatique (évitement) et retour visuel immédiat (écran, LED), offre un support réutilisable pour enseigner la logique de décision conditionnelle à partir de données de capteur réelles.
 
-- **Élèves concernés** : élèves du club sciences/technologie ou d'une classe de technologie/informatique, niveau collège ou lycée
-- **Discipline d'usage** : technologie et algorithmique, avec un ancrage possible en physique-chimie (son, lumière, distance) pour l'exploitation des mesures affichées
+- **Élèves concernés** : élèves du club sciences/technologie ou d'une classe de technologie, niveau collège ou lycée
+- **Discipline d'usage** : technologie et algorithmique
 - **Établissement / lab d'accueil** : INFPP Lomé
 
 ## 3. Objectifs d'apprentissage
 
-1. **Algorithmique.** Écrire une boucle de décision conditionnelle qui ajuste le comportement du robot (avancer, tourner, s'arrêter) à partir de plusieurs capteurs lus en continu. *(chapitre du programme officiel à préciser par l'équipe)*
-2. **Physique appliquée.** Expliquer le principe de mesure d'un capteur à ultrasons (temps de vol d'une onde réfléchie) et comparer les valeurs de deux capteurs identiques montés sur le robot.
-3. **Électronique de commande.** Décrire le rôle d'un driver moteur (pont en H) dans le pilotage en vitesse et en sens de rotation d'un moteur à courant continu.
+1. **Algorithmique.** Écrire une boucle de décision conditionnelle qui compare une mesure de distance à un seuil et déclenche une manœuvre d'évitement.
+2. **Physique appliquée.** Expliquer le principe de mesure d'un capteur à ultrasons (émission, écho, temps de vol) à partir de la valeur affichée en temps réel sur l'écran du robot.
+3. **Électronique de puissance.** Décrire le rôle d'un driver moteur (pont en H) et la nécessité de séparer l'alimentation de puissance des moteurs de l'alimentation logique — enseignement tiré directement de l'incident du 12 septembre 2026 (voir `docs/04-securite/analyse-risques.md`).
 
 ## 4. Description du dispositif
+**Ce que l'objet fait** : le robot avance et mesure en continu la distance à l'obstacle le plus proche grâce à un capteur à ultrasons. Tant que la voie est libre, la LED rouge reste éteinte. Dès que le robot détecte un obstacle, la LED rouge s'allume. Un récepteur de télécommande permet à tout moment de commander le robot (marche, arrêt, avance) indépendamment de la logique automatique d'évitement.
 
-**Ce que l'objet fait** : le robot suit une ligne au sol grâce à ses capteurs infrarouges, s'arrête ou évite un obstacle détecté par les capteurs à ultrasons, et affiche en continu sur son écran les valeurs mesurées par ses capteurs annexes (niveau sonore ambiant, luminosité). Des LED et un buzzer signalent l'état du robot (marche, alerte, obstacle). Un bouton poussoir active le robot ; les autres boutons peuvent servir à changer de mode d'affichage ou de comportement.
 
-**Ce que l'élève en fait** : il câble le circuit sur breadboard, programme la logique de décision (suivi de ligne, évitement, affichage), et compare en conditions réelles les mesures des capteurs doublés (ultrason, microphone, luminosité) — une occasion concrète de discuter de la fiabilité et de la redondance d'une mesure.
+**Ce que l'élève en fait** : il observe la correspondance entre la valeur affichée à l'écran et le comportement réel du robot, règle le seuil de déclenchement de l'évitement, et peut reprendre la main par télécommande pour comparer pilotage manuel et comportement autonome.
 
-**Note sur les capteurs en double exemplaire** : le driver moteur, les capteurs à ultrasons, les microphones et les capteurs de lumière sont prévus en 2 exemplaires chacun dans la liste de l'équipe. C'est une marge de rechange en cas de casse.
-**Croquis** : à réaliser et à verser dans `docs/medias/` avant validation du jalon (schéma du châssis, position des capteurs, de l'écran et des boutons).
+**Croquis** : Le schéma du dispositif est téléversé dans docs/medias/.
 
 ## 5. Architecture technique et liste des composants
 
 | Composant | Rôle | Quantité |
 |---|---|---|
-| Carte ESP32-S3 | Contrôleur principal | 1 |
+| Carte ESP32 DevKit | Contrôleur principal | 1 |
 | Châssis robot 2 roues + moteurs DC | Structure mobile et motorisation | 1 kit |
-| Driver moteur (L298N ou TB6612FNG) | Pilotage des moteurs DC | 2 |
-| Capteurs infrarouges (IR) suivi de ligne | Détection de la ligne au sol | 4 |
-| Capteur à ultrasons (HC-SR04) | Détection d'obstacle / mesure de distance | 2 |
-| Capteur microphone numérique (ICS-43434 ou MAX9814) | Mesure du niveau sonore ambiant | 2 |
-| Écran d'affichage (OLED I2C ou LCD) | Affichage des valeurs mesurées | 1 |
-| Capteur de lumière (photorésistance LDR / module) | Mesure de la luminosité ambiante | 2 |
-| Buzzer (actif ou passif) | Signal d'alerte sonore | 3 |
-| Pile 9V + support de pile | Alimentation | 2 |
-| Bouton poussoir | Activation / changement de mode | 3 |
-| Câbles jumpers (M-M, F-F, M-F) | Connexions sur breadboard | 2 lots |
-| Breadboard | Prototypage du circuit | 2 |
-| LED (diverses couleurs) | Voyants d'état et d'alerte | 10 |
-| Résistances (220 Ω, 330 Ω, 10 kΩ, valeurs variées) | Limitation de courant LED, pont diviseur LDR | 20 |
-| Câble USB de programmation | Liaison ordinateur ↔ carte | 1 |
+| Driver moteur TB6612FNG | Pilotage des 2 moteurs DC | 1 |
+| Capteur à ultrasons HC-SR04 | Détection d'obstacle / mesure de distance | 1 |
+| Écran OLED I2C | Affichage de la distance en temps réel | 1 |
+| Récepteur infrarouge + télécommande | Pilotage manuel du robot | 1 |
+| Bouton poussoir | Activation / changement de mode | 1 |
+| LED rouge | Voyant « obstacle détecté » (fixe), puis clignotant pendant la rotation d'évitement | 1 |
+| Résistance (220 Ω pour la LED) | Limitation de courant | 1
+/ |
+| Accumulateurs Li-ion 7,4 V (2 éléments en série) | Alimentation dédiée du rail moteur | 1 pack |
+| Câbles jumpers, breadboard | Câblage de prototypage | selon besoin |
 
-**Procédés de fabrication envisagés** (exigence ET-FAB-02 : au moins 3 procédés distincts) : [à préciser par l'équipe — probable : découpe laser ou impression 3D pour un habillage/support de capteurs sur le châssis, à confirmer selon ce que le kit châssis inclut déjà]
 
 ## 6. Rôle des élèves
 
-Position principale sur le continuum : **PAR** — les élèves conçoivent et programment eux-mêmes la logique de décision du robot (suivi de ligne, évitement, affichage), et conduisent la comparaison des capteurs doublés.
+Les élèves conçoivent, câblent et programment eux-mêmes la logique de décision (seuil de distance, manœuvre d'évitement) et le partage entre pilotage automatique et pilotage par télécommande.
 
 ## 7. Ancrage réseau et implantation
 
-- **Lab de rattachement** : [à préciser]
-- **Lieu d'usage** : salle de classe ou club robotique, avec un parcours de ligne au sol à préparer pour les tests
-- **Conditions matérielles** : sol plat pour le suivi de ligne, éclairage ambiant à prendre en compte pour le calibrage du capteur de lumière
+- **Lieu d'usage** : salle de classe ou club robotique, sol plat dégagé pour les tests de déplacement
+- **Conditions matérielles** : zone de test dégagée d'au moins quelques mètres, accumulateurs chargés à l'avance
 
 ## 8. Périmètre
 
 | | Contenu |
 |---|---|
-| Dans la v1.0 (Socle) | Suivi de ligne fonctionnel, arrêt sur obstacle détecté par ultrason, activation par bouton, LED d'état |
-| En option (Avancé / Expert) | Affichage en continu des mesures (son, lumière, distance) sur l'écran ; comparaison des deux capteurs redondants ; évitement actif (contournement plutôt que simple arrêt) |
-| Explicitement exclu | [à préciser par l'équipe — ex. navigation autonome complexe, reconnaissance vocale, connexion réseau] |
+| Dans la v1.0 (Socle) | Mesure de distance en continu, affichage temps réel sur écran, évitement automatique avec signalisation LED, pilotage par télécommande |
+| En option (Avancé / Expert) | Réglage du seuil d'évitement par télécommande plutôt que dans le code |
+| Explicitement exclu | Microphone, capteur de lumière (LDR), buzzer — retirés du périmètre final après les itérations matérielles de début septembre |
 
 ## 9. Risques et parades
 
-| Risque | Type | Parade |
-|---|---|---|
-| La pile 9V peut ne pas fournir assez de courant pour alimenter à la fois les moteurs et l'électronique de commande | technique | Prévoir une alimentation séparée pour les moteurs si la pile 9V montre des signes de faiblesse (redémarrages, moteurs faibles) |
-| Inversion de polarité sur le driver moteur | technique | Vérifier le câblage avant chaque mise sous tension ; disposer d'un 2ᵉ driver en rechange (déjà prévu dans la liste) |
-| Capteur de lumière et microphone sensibles aux conditions ambiantes de la salle | technique | Calibrer les seuils dans les conditions réelles d'utilisation, comme pour tout capteur analogique |
-| Écran, capteurs ou câbles jumpers endommagés en cours de manipulation | matériel | Quantités prévues avec marge (2 breadboards, 2 lots de jumpers, 10 LED, 20 résistances) ||
+Voir `docs/04-securite/analyse-risques.md` pour le tableau complet, incluant l'incident réel du 12 septembre 2026 (retour de tension USB ayant endommagé la carte mère de l'ordinateur de programmation) et les mesures de séparation des rails d'alimentation désormais appliquées.
 
 ## 10. Budget matière estimé
 
-*À chiffrer par l'équipe auprès du magasin du FabLab — plafond indicatif : 60 000 FCFA.*
+*À chiffrer par l'équipe — plafond indicatif : 60 000 FCFA.*
 
 | Poste | Estimation (FCFA) |
 |---|---|
-| Capteurs (IR, ultrason, microphone, LDR) | [à chiffrer] |
-| Écran, boutons, buzzers, LED, résistances | [à chiffrer] |
-| Piles, breadboards, jumpers, câble USB | [à chiffrer] |
+| ESP32 DevKit, châssis + moteurs, driver TB6612FNG | [à chiffrer] |
+| Capteur ultrason, écran OLED, récepteur IR + télécommande | [à chiffrer] |
+| LED, résistances, bouton, câblage | [à chiffrer] |
+| Accumulateurs Li-ion 7,4 V | [à chiffrer] |
 | **Total estimé** | [à chiffrer] |
 
 ## 11. Licences et diffusion
 
 Code proposé sous licence libre (MIT, cohérente avec le fichier `LICENSE` du dépôt). Documentation et plans proposés sous licence Creative Commons BY-SA (cohérente avec `LICENSE-DOCS` et `LICENSE-HARDWARE`).
+
+
+## Exemptions demandées
