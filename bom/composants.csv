@@ -1,5 +1,16 @@
 sous_ensemble;reference;designation;boitier_ou_format;quantite;procede_ou_source;fournisseur;prix_unitaire_fcfa;prix_total_fcfa;etat
-pcb;R1-R4;Resistance 220 ohms 1206;CMS 1206;4;achat;magasin PNFA;25;100;monte
-structure;FLANC-G;Flanc gauche CP 3 mm;600x400;1;laser;chute magasin;0;0;fabrique
-firmware;-;Bibliotheque OneWire v2.3.8;-;1;telechargement;Arduino;0;0;installe
-TOTAL;-;Cout matiere total;-;-;-;-;-;0;-
+pcb;PCB1;Carte electronique definitive;PCB grave/perce, concu sous KiCad;1;fabrique;INFPP Lome;0;0;fabrique
+pcb;U1;Microcontroleur ESP32 DevKit;module;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+pcb;U2;Driver moteur TB6612FNG;module;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+pcb;-;Recepteur infrarouge (telecommande);module;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+pcb;-;Telecommande infrarouge;boitier;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];fourni avec le recepteur
+pcb;-;Capteur a ultrasons HC-SR04;module;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+pcb;-;Ecran OLED I2C;module;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+pcb;-;Fils de connexion / nappe;-;1 lot;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+structure;-;Chassis robot 2 roues + moteurs DC a engrenages;kit;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+structure;-;Entretoises et visserie d'assemblage;M3 ou equivalent;1 lot;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+alimentation;ALIM1;Accumulateurs Li-ion 7,4 V (2 elements en serie);pack;1;achat;magasin PNFA;[a chiffrer];[a chiffrer];monte
+firmware;-;Bibliotheque de reception infrarouge (IRremote ou equivalent);-;1;telechargement;bibliotheque libre;0;0;installe
+firmware;-;Bibliotheque ecran OLED (Adafruit SSD1306 + GFX);-;1;telechargement;bibliotheque libre;0;0;installe
+TOTAL;-;Cout matiere total;-;-;-;-;-;[a chiffrer];-
+;;;;;;;;;

@@ -1,28 +1,12 @@
-# Charte de l'équipe NN
+# Charte de l'équipe 20
 
 > Livrable L1 · Jalon J0 (mardi 25 août 2026) · exigée à la revue J1.
+> Complétée le 16 septembre 2026 — en retard sur le jalon J0, à régulariser au plus vite.
 
 ## Identité
 
-**Dépôt** `pnfa2026-eqNN-nom-court`
-**Groupe pédagogique** …… · **Encadreur référent** ……
-
-| Membre | Discipline | Établissement | Compte GitHub |
-|---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
-
-## Rôles tournants
-
-| Rôle | S1 (25-29 août) | S2 (31/08-05/09) | S3 (07-12 sept.) | S4 (14-18 sept.) |
-|---|---|---|---|---|
-| Chef ou cheffe de projet | | | | |
-| Responsable documentation | | | | |
-| Responsable conception-fabrication | | | | |
-| Responsable instrumentation | | | | |
-| Responsable pédagogique *(équipe de 5)* | | | | |
+**Dépôt** `pnfa2026-YOMBOU-Komnakan`
+**Groupe pédagogique** [à préciser] · **Encadreur référent** [à préciser]
 
 ## Règles de décision
 
@@ -36,13 +20,11 @@
    documentation vérifie, il ne rédige pas à la place.
 5. **Poussée** — vers GitHub au moins deux fois par jour, midi et soir.
    Rien ne reste sur un seul poste.
+6. **Sécurité électrique** — règle ajoutée suite à l'incident du 12 septembre 2026 : aucun nouveau câblage de puissance (moteurs, driver) n'est mis sous tension avec l'ordinateur de programmation encore branché tant que le câblage n'a pas été vérifié par un second membre de l'équipe.
 
 ## Engagements de présence
 
 - Absence : prévenir le chef de projet ; les tâches en cours sont réassignées le jour même.
 - Désaccord persistant : porté à l'encadreur référent sous 24 h.
-- Chaque membre s'engage à pouvoir expliquer l'ensemble du dispositif à la soutenance.
+- Chaque membre s'engage à pouvoir expliquer l'ensemble du dispositif à la soutenance.]
 
-## Signatures
-
-Date : …… · Signatures des membres : ……
